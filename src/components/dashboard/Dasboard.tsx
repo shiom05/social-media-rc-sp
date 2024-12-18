@@ -34,8 +34,10 @@ const Dashboard = () => {
     try {
       const response = await fetchPosts();
       setPosts(response.data.posts);
-      console.log(response);
-    } catch (error) {}
+      console.log('...calling',response);
+    } catch (error) {
+      console.error(error)
+    }
   };
 
   useEffect(() => {
@@ -48,11 +50,11 @@ const Dashboard = () => {
         <Button type="primary" className="button" onClick={showModal} >Create Post</Button>
         <div className="post-layout">
            {posts.length>0 ? <>{
-            posts.map((post:Post)=>(<PostCard key={post.postId} post={post}></PostCard>))
+            posts.map((post:Post)=>(<PostCard key={post.postId} post={post} repoadPosts={getPosts}></PostCard>))
            }</> : <>No Posts to display...</>}
         </div>
       </div>
-      <CreatePostModal isModalOpen={isCreateModalOpen} onClose={handleCancel}></CreatePostModal>
+      <CreatePostModal repoadPosts={getPosts} isModalOpen={isCreateModalOpen} onClose={handleCancel}></CreatePostModal>
     </>
   );
 };

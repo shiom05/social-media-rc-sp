@@ -6,9 +6,10 @@ import PostModal from "./postmodal/PostModal";
 
 export interface PostProps {
   post: Post;
+  repoadPosts: ()=> void
 }
 
-const PostCard = ({ post }: PostProps) => {
+const PostCard = ({ post, repoadPosts }: PostProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [postClicked, setPostClicked] = useState<Post | null>(null);
 
@@ -30,7 +31,7 @@ const PostCard = ({ post }: PostProps) => {
       {post.postComments.length} comments
     </Card>
     
-    <PostModal post={postClicked} onClose={handleCancel} isModalOpen={isModalOpen} ></PostModal>
+    <PostModal post={postClicked} onClose={handleCancel} repoadPosts={repoadPosts} isModalOpen={isModalOpen} ></PostModal>
     
     </>
     

@@ -6,17 +6,21 @@ import { editPostComment } from "../../../services/posts.service";
 interface PostModalProps {
     post: Post | null ;
     onClose: () => void;
-    isModalOpen: boolean
+    isModalOpen: boolean;
+    repoadPosts: ()=> void;
   }
 
 
-const PostModal = ({ post, onClose, isModalOpen }: PostModalProps)=>{
+const PostModal = ({ post, onClose, isModalOpen, repoadPosts }: PostModalProps)=>{
     const [comment, setComment]= useState('');
 
     const saveComment = (async()=>{
         try {
             const res = await editPostComment(post?.postId, comment)
-            console.error(res)
+            console.log(res);
+            post?.postComments.push(comment)
+            repoadPosts();
+            setComment('')
         } catch (error) {
             console.error(error)
         }
@@ -41,6 +45,10 @@ const PostModal = ({ post, onClose, isModalOpen }: PostModalProps)=>{
                   <li key={index}>{comment}</li>
                 ))}
               </ul>
+            </div>
+            <div>
+                <input type="text" value={comment} onChange={(e)=>setComment(e.target.value)} placeholder="enter new comment"/>
+                <button onClick={saveComment}>Add comment</button>
             </div>
           </Modal>
         }</>

@@ -6,11 +6,13 @@ import { Post } from "../../dashboard/Dasboard";
 interface CreatePostModalProps {
   isModalOpen: boolean;
   onClose: () => void;
+  repoadPosts: ()=> void
 }
 
 const CreatePostModal: React.FC<CreatePostModalProps> = ({
   isModalOpen,
   onClose,
+  repoadPosts,
 }) => {
   const [form] = Form.useForm();
 
@@ -29,7 +31,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({
       message.success("Post created successfully!");
 
       form.resetFields(); // Reset the form
-
+      repoadPosts();
       onClose(); // Close the modal
     } catch (error) {
       message.error("Failed to create post!");
