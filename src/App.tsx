@@ -1,24 +1,19 @@
-import React from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import NavBar from './components/NavBar';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Dashboard from './components/dashboard/Dasboard';
 
-function App() {
+
+const App = () => {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar></NavBar>
+      <Dashboard></Dashboard>
     </div>
   );
 }
